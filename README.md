@@ -179,7 +179,9 @@ aws s3api head-object --bucket dube-drop-notes-2025 --key index.html
 
 
 # 📤 Deployment Output
+
 ✅ S3 Bucket: dube-drop-notes-2025 
+
 ✅ Website Endpoint: http://dube-drop-notes-2025.s3-website-us-east-1.amazonaws.com
 
 # 🧪 Testing
