@@ -8,7 +8,7 @@ Imagine you want to put up a poster in a public space. Instead of manually print
 
 That’s Terraform: You write infrastructure instructions once, and it builds your cloud environment reliably and repeatably.
 
-# 📚 Table of Contents
+## 📚 Table of Contents
 Real-World Analogy
 
 Project Goals
@@ -33,7 +33,7 @@ Cleanup Instructions
 
 Final Notes
 
-*🎯 Project Goals
+# 🎯 Project Goals
 ✅ Create an S3 bucket using Terraform
 
 ✅ Upload notes.txt and index.html to the bucket
@@ -46,7 +46,7 @@ Final Notes
 
 ✅ Document every step and error for future reference
 
-*🛠️ Tech Stack
+# 🛠️ Tech Stack
 Service	Purpose
 AWS S3	Hosts the static website
 Terraform	Provisions infrastructure as code
@@ -54,7 +54,7 @@ GitHub	Stores and version-controls the code
 AWS Console	Used for manual fixes and inspection
 
 
-*📁 Folder Structure
+# 📁 Folder Structure
 DubeDrop/
 ├── main.tf           # Terraform configuration
 ├── index.html        # Static website homepage
@@ -63,7 +63,7 @@ DubeDrop/
 └── src/              # (Unused folder from earlier setup)
 
 
-*⚙️ How It Works
+# ⚙️ How It Works
 Terraform provisions an S3 bucket named dube-drop-notes-2025.
 
 It enables static website hosting and sets index.html as the homepage.
@@ -74,33 +74,41 @@ A bucket policy allows public access to all files.
 
 The website is accessible via a public endpoint.
 
-*🧾 Terraform Setup
+# 🧾 Terraform Setup
+
 ✅ Commands Used
 
+``` Bash/Terminal
 cd ~/Desktop/DubeDrop
 terraform init
 terraform apply
+
+```
 
 ⚠️ Important: Terraform must be run from the folder containing main.tf. Running it from src/ caused errors like:
 
 Terraform initialized in an empty directory!
 
-🐞 Common Errors & Fixes
-❌ Error: Duplicate Resource Name
+# 🐞 Common Errors & Fixes
 
+# ❌ Error: Duplicate Resource Name
+
+``` Text
 Error: Duplicate resource "aws_s3_bucket_object" configuration
-
+``` 
 
 Fix: Renamed one of the aws_s3_bucket_object blocks to avoid duplicate names:
 
-
+``` Hcl
 resource "aws_s3_bucket_object" "notes_upload" { ... }
 resource "aws_s3_bucket_object" "index_upload" { ... }
+``` 
 
+# ❌ Error: Blocked Public Access
 
-❌ Error: Blocked Public Access
-
+``` Text
 AccessDenied: Public policies are blocked by the BlockPublicPolicy setting.
+```
 
 Fix:
 
@@ -113,64 +121,76 @@ Unchecked all four boxes
 Saved changes
 
 
-❌ Error: ACLs Not Supported
+# ❌ Error: ACLs Not Supported
 
 AccessControlListNotSupported: The bucket does not allow ACLs
 
 Fix:
 
-Went to AWS Console → S3 → Bucket → Permissions
+- Went to AWS Console → S3 → Bucket → Permissions
 
-Edited Object Ownership
+- Edited Object Ownership
 
-Changed to ACLs enabled
+- Changed to ACLs enabled
 
-Saved changes
+- Saved changes
 
 
-❌ Error: File Downloads Instead of Rendering
+# ❌ Error: File Downloads Instead of Rendering
+
 Issue: Visiting the site downloaded index.html instead of displaying it.
 
-Fix:
+Fix: Re-uploaded ``` index.html ``` using AWS CLI with correct content type:
 
-Re-uploaded index.html using AWS CLI with correct content type:
-
-
+``` Bash
 aws s3 cp index.html s3://dube-drop-notes-2025/index.html \
   --acl public-read \
   --content-type "text/html"
 
+```
+
 Verified no Content-Disposition: attachment metadata using:
 
+``` Bash
 aws s3api head-object --bucket dube-drop-notes-2025 --key index.html
+```
 
-*🖥️ AWS Console Steps
-Enabled static website hosting
+# 🖥️ AWS Console Steps
 
-Set index.html as the index document
+- Enabled static website hosting
 
-Edited bucket policy to allow public access
+- Set index.html as the index document
 
-Verified website endpoint under Properties → Static Website Hosting
+- Edited bucket policy to allow public access
+
+- Verified website endpoint under Properties → Static Website Hosting
 
 
-*📤 Deployment Output
-✅ S3 Bucket: dube-drop-notes-2025 ✅ Website Endpoint: http://dube-drop-notes-2025.s3-website-us-east-1.amazonaws.com
+# 📤 Deployment Output
+✅ S3 Bucket: dube-drop-notes-2025 
+✅ Website Endpoint: http://dube-drop-notes-2025.s3-website-us-east-1.amazonaws.com
 
-🧪 Testing
-✅ In Browser Visit the endpoint — the site loads instantly.
+# 🧪 Testing
 
-✅ With curl
+# ✅ In Browser Visit the endpoint — the site loads instantly.
 
+```
+http://dube-drop-notes-2025.s3-website-us-east-1.amazonaws.com
+``` 
+
+# ✅ With curl
+
+``` Bash
 curl http://dube-drop-notes-2025.s3-website-us-east-1.amazonaws.com
+```
 
-*🧹 Cleanup Instructions
+# 🧹 Cleanup Instructions
 
 To avoid charges:
 
 🪣 S3 Bucket: Go to S3 → Select bucket → Empty → Delete
 
-🧾 Terraform: Run terraform destroy to remove all resources
+🧾 Terraform: Run ``` terraform destroy ``` to remove all resources
 
 
 
