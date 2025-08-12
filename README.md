@@ -1,14 +1,14 @@
-*🚀 DubeDrop
+# 🚀 DubeDrop
 Static Website Hosting on AWS S3 with Terraform
 
 DubeDrop is a hands-on cloud infrastructure project that uses Terraform to provision and manage AWS resources. It demonstrates core principles of Infrastructure as Code (IaC) and walks through deploying a static website on Amazon S3 — including real-world troubleshooting and AWS Console interactions.
 
-*🧠 Real-World Analogy
+# 🧠 Real-World Analogy
 Imagine you want to put up a poster in a public space. Instead of manually printing and taping it up, you write instructions once — and every time you want to post something new, the system does it for you automatically.
 
 That’s Terraform: You write infrastructure instructions once, and it builds your cloud environment reliably and repeatably.
 
-*📚 Table of Contents
+# 📚 Table of Contents
 Real-World Analogy
 
 Project Goals
