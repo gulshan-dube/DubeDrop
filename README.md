@@ -55,12 +55,24 @@ AWS Console	Used for manual fixes and inspection
 
 
 # 📁 Folder Structure
+
+```
 DubeDrop/
 ├── main.tf           # Terraform configuration
 ├── index.html        # Static website homepage
 ├── notes.txt         # Sample file uploaded to S3
 ├── README.md         # Project documentation
 └── src/              # (Unused folder from earlier setup)
+
+```
+
+```main.tf```: Defines the S3 bucket, uploads files, and sets website hosting
+
+```index.html```: The homepage of your static site
+
+```notes.txt```: A sample file to demonstrate file uploads
+
+```README.md```: This documentation file
 
 
 # ⚙️ How It Works
