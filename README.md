@@ -1,16 +1,17 @@
 # 🚀 DubeBox
 **Flask + Redis microservice with Docker Compose and persistent storage**
 
-DubeBox is a hands‑on, interview‑ready microservice: a Python Flask API talking to a Redis backend, orchestrated with Docker Compose.  
+DubeBox is a hands‑on, portfolio‑ready microservice: a Python Flask API talking to a Redis backend, orchestrated with Docker Compose.  
 It demonstrates containerization, private inter‑container networking, and persistence via Docker volumes.  
 It maps cleanly to AWS ECS (Fargate) for cloud deployment.
+
 
 ---
 
 
-## 🧠 Real‑world analogy (simplified) 
+## 🧠 Real‑world analogy
 
-## Think of running a little café:
+## It's like running a little café:
 
 - Flask is the chef who cooks every order on the spot.
 - Redis is the fridge that holds quick‑grab ingredients the chef needs constantly.
